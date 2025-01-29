@@ -1,0 +1,8 @@
+const TOUCHED_STATE = {
+    TOP: 'TOUCHED_TOP',
+    BODY: 'TOUCHED_BODY',
+    BOTTOM: 'TOUCHED_BOTTOM',
+    NO: 'NO_TOUCHED'
+}
+
+export default TOUCHED_STATE
