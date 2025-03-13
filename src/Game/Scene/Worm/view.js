@@ -16,8 +16,8 @@ class WormView extends CompositeView {
         this.on(ACTIONS.WORM.MOVE, this.onMoveWorm.bind(this))
         this.on(ACTIONS.WORM.STOP, this.onStopWorm.bind(this))
         this.on('ON_PRESS_UP_MOUSE', this.onFireWorm.bind(this))
-        this.on('ON_MOVE_MOUSE', this.onHoverWorm.bind(this))
-        this.on('ON_PRESS_UP_MOUSE', this.onFocusWorm.bind(this))
+        // this.on('ON_MOVE_MOUSE', this.onHoverWorm.bind(this))
+        // this.on('ON_PRESS_UP_MOUSE', this.onFocusWorm.bind(this))
         this.on('ON_RUN', this.onRun.bind(this))
         this.on('ON_CHECK_COLLIDING', this.onCheckColliding.bind(this))
 

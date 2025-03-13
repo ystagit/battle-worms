@@ -1,8 +1,6 @@
 import React from 'react'
-import Canvas from './components/Canvas'
+import GameCanvas from './components/Canvas'
 import EventEmitter from './engine/core/events/EventEmitter'
-
-import Game from './Game'
 
 class App extends React.Component {
 
@@ -42,7 +40,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <Canvas style={{ border: "1px solid black" }}
+                <GameCanvas style={{ border: "1px solid black" }}
                         width={width}
                         height={height}
                 />

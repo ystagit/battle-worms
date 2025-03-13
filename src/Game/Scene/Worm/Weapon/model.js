@@ -29,6 +29,12 @@ class Weapon extends GameObject {
 
     onUpdateCursorPosition(position) { this.cursorPosition = position }
 
+    hide() {
+        if (!this.thrown) {
+            super.hide();
+        }
+    }
+
     run(secondsPassed, wormComposite) {
 
         const wormModel = wormComposite.model
