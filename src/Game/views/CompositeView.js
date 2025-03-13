@@ -39,6 +39,11 @@ class CompositeView extends ComponentView {
         this.parent.children.splice(index , 1)
     }
 
+    removeChildByModel(model) {
+        const index = this.children.findIndex(ch => ch.model.id === model.id)
+        this.children.splice(index, 1)
+    }
+
     removeChild(index) {
         this.children.splice(index, 1)
     }

@@ -20,6 +20,8 @@ class Timer extends GameObject {
     }
 
     setTimer(seconds) {
+        this.stop();
+
         this.timerInSeconds = seconds
         if (this.timerInSeconds < 10) {
             this.renderable.setText('0' + this.timerInSeconds.toString())
@@ -36,7 +38,7 @@ class Timer extends GameObject {
 
                 if (this.timerInSeconds < 0) {
                     this.renderable.setText('00')
-                    this.stop()
+                    this.up()
                 } else if (this.timerInSeconds < 10) {
                     this.renderable.setText('0' + this.timerInSeconds.toString())
                 } else {
@@ -49,6 +51,11 @@ class Timer extends GameObject {
     stop() {
         clearInterval(this.intervalId)
         this.emit('ON_STOP_TIMER', null)
+    }
+
+    up() {
+        clearInterval(this.intervalId)
+        this.emit('ON_NEXT_TEAM', this)
     }
 }
 

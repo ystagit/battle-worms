@@ -1,10 +1,11 @@
 import GameObject from '../../../engine/GameObject'
 import ACTIONS from '../../../constants/actions'
 import RenderableSpriteAnimation from '../../../engine/renderables/RenderableSpriteAnimation'
-import LandModel from "../Land/model";
-import MathUtils from "../../../engine/MathUnits";
+import LandModel from '../Land/model'
+import MathUtils from '../../../engine/MathUnits'
 import TOUCHED_STATE from '../../../engine/GameObject/TouchedState'
 import Characteristics from './Сharacteristics'
+import Team from '../../Team'
 
 class Worm extends GameObject {
 
@@ -15,6 +16,7 @@ class Worm extends GameObject {
         this.textureName = 'Worm'
         this.distanceToBottom = -1
         this.direction = [1, 0]
+        this.team = null;
 
         this.characteristics = new Characteristics()
         this.transform.setSize(this.direction[0] * -5, 5)
@@ -30,6 +32,16 @@ class Worm extends GameObject {
         player.addAnimation('landing', { topPixel: 256, leftPixel: 256 * 11, widthInPixel: 256, heightInPixel: 256, paddingInPixel: 0, numberOfElements: 3, repetitions: 1 })
         player.setAnimation('stop')
         player.start()
+    }
+
+    setTeam(team) {
+
+        if (team instanceof Team) {
+            this.team = team;
+            return true;
+        }
+
+        return false;
     }
 
     run(secondsPassed, wormComposite) {
@@ -49,7 +61,7 @@ class Worm extends GameObject {
 
     onMove(direction) {
 
-        if (this.falling) { return }
+        if (!this.team.active || this.falling) { return }
 
         switch (direction) {
             case ACTIONS.DIRECTION.UP:
@@ -81,6 +93,8 @@ class Worm extends GameObject {
     }
 
     onJump(parentComposite) {
+        if (!this.team.active) { return }
+
         if (!this.jumping && !this.falling) {
             this.jumping = true
             this.setAnimation('pre-jump', () => {

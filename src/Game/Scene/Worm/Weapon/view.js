@@ -1,6 +1,7 @@
 import CompositeView from '../../../views/CompositeView'
 import WormView from '../view'
 import Explosion from './Explosion'
+import Worm from "../model";
 
 class WeaponView extends CompositeView {
 
@@ -19,7 +20,16 @@ class WeaponView extends CompositeView {
         this.add(explosion)
     }
 
-    onFire(data) { this.controller.onFireHandler(this.parent, data) }
+    onFire(data) {
+        const wormModel = this.parent.model;
+
+        if (wormModel instanceof Worm) {
+
+            if (wormModel.team.active) {
+                this.controller.onFireHandler(this.parent, data)
+            }
+        }
+    }
     onRun(secondsPassed) { this.controller.onRunHandler(secondsPassed, this.parent) }
     onCheckColliding() { this.controller.onCheckCollidingHandler(this.parent) }
 

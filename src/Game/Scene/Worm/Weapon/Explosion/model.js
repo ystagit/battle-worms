@@ -53,6 +53,7 @@ class ExplosionModel extends GameObject {
                                 this.circle.cut(landComponent.model)
                                 this.player.clearAnimation()
                                 weaponComposite.destroy()
+                                setTimeout(() => this.emit('ON_NEXT_TEAM', null))
                             })
                         }
                     }
