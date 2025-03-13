@@ -102,7 +102,10 @@ class Weapon extends GameObject {
     }
 
     onFire(wormComposite, data) {
+        if (this.thrown) { return }
+
         const wormModel = wormComposite.model
+
         if (wormModel instanceof WormModel) {
             this.thrown = true
             const point = [0, 0]

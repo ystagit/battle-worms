@@ -10,6 +10,15 @@ class Team {
         this.worms = []
     }
 
+    focusWorm(index) {
+        const worm = this.worms[index]
+
+        if (worm) {
+            worm.model.focused = true
+            worm.addWeapon()
+        }
+    }
+
     addWorm(worm) {
 
         if (worm instanceof WormView

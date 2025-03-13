@@ -6,25 +6,38 @@ class WormController extends BaseController {
     }
 
     onFireHandler() {
-        this._model.onFire()
+        if (this.isValid()) {
+            this._model.onFire()
+        }
+    }
+
+    onDetectStrengthHandler() {
+        if (this.isValid()) {
+            this._model.onDetectStrength()
+        }
     }
 
     onMoveHandler(direction) {
-        if (this._model.focused) {
+        if (this.isValid()) {
             this._model.onMove(direction)
         }
     }
 
     onStopHandler(parentComposite) {
-        if (this._model.focused) {
+        if (this.isValid()) {
             this._model.onStop(parentComposite)
         }
     }
 
     onJumpHandler(parentComposite) {
-        if (this._model.focused) {
+        if (this.isValid()) {
             this._model.onJump(parentComposite)
         }
+    }
+
+    isValid() {
+        return this._model.team.active
+            && this._model.focused
     }
 }
 

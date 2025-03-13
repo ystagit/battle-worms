@@ -12,7 +12,7 @@ class Worm extends GameObject {
     constructor() {
         super()
         this.color = [1.0, 1.0, 1.0, 0.0]
-        this.focused = true
+        this.focused = false
         this.textureName = 'Worm'
         this.distanceToBottom = -1
         this.direction = [1, 0]
@@ -60,8 +60,7 @@ class Worm extends GameObject {
     }
 
     onMove(direction) {
-
-        if (!this.team.active || this.falling) { return }
+        if (this.falling) { return }
 
         switch (direction) {
             case ACTIONS.DIRECTION.UP:
@@ -93,8 +92,6 @@ class Worm extends GameObject {
     }
 
     onJump(parentComposite) {
-        if (!this.team.active) { return }
-
         if (!this.jumping && !this.falling) {
             this.jumping = true
             this.setAnimation('pre-jump', () => {
@@ -163,9 +160,21 @@ class Worm extends GameObject {
     }
 
     onFire() {
-        this.emit('ON_FIRE', {
-            strength: this.characteristics.strength
-        })
+        if (this.falling || this.jumping) { return }
+
+        const chr = this.characteristics
+        let throwSpeed = Date.now() - this.startTimeStrength;
+        throwSpeed = throwSpeed > chr.throwSpeed ? chr.throwSpeed : throwSpeed
+        let throwSpeedInPerc = throwSpeed * 100 / chr.throwSpeed
+        const strength = chr.strength * throwSpeedInPerc / 100
+        this.startTimeStrength = 0
+
+        this.emit('ON_FIRE', { strength })
+    }
+
+    onDetectStrength() {
+        if (!this.focused || this.falling || this.jumping) { return }
+        this.startTimeStrength = Date.now();
     }
 
     /*
@@ -222,7 +231,9 @@ class Worm extends GameObject {
     * And performs 'landing' animation
     * */
     land(timeout) {
-        setTimeout(() => { this.jumping = false }, timeout)
+        setTimeout(() => {
+            this.jumping = false
+        }, timeout)
         this.setAnimation('landing', () => this.setAnimation('stop'))
     }
 

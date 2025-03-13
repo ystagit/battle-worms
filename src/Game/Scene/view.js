@@ -56,7 +56,7 @@ class SceneView extends CompositeView {
         const t1 = new Team("Team 1")
         t1.active = true
         t1.addWorm(Worm.create(20, 50))
-        t1.worms[0].addWeapon()
+        t1.focusWorm(0)
 
         const t2 = new Team("Team 2")
         t2.addWorm(Worm.create(30, 50))
@@ -80,7 +80,7 @@ class SceneView extends CompositeView {
         }
 
         nextTeam.active = true;
-        nextTeam.worms[0].addWeapon()
+        nextTeam.focusWorm(0)
         this.timer.model.setTimer(30)
     }
 

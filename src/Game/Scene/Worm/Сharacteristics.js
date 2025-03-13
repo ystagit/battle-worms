@@ -1,7 +1,8 @@
 class Characteristics {
 
     constructor() {
-        this.strength = 15
+        this.throwSpeed = 1500 // in ms
+        this.strength = 50
     }
 
 }
