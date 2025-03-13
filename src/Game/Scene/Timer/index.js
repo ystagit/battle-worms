@@ -6,13 +6,11 @@ let model = null
 let controller = null
 
 const Timer = {
-    create: () => {
+    create: (x, y) => {
         model = new TimerModel()
+        model.setPosition(x, y)
         controller = new BaseController(model)
         return new TimerView(model, controller)
-    },
-    position: (x, y) => {
-        model.setPosition(x, y)
     }
 }
 

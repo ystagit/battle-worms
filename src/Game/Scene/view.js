@@ -32,7 +32,7 @@ class SceneView extends CompositeView {
             const sky = Sky.create()
             const land = Land.create(xLandPos, yLandPos)
             const worm = Worm.create(xUnitPos, yUnitPos)
-            const timer = Timer.create()
+            const timer = Timer.create(1, 2)
             // const hero = Hero.create(40, 40)
             const point = Point.create(0, 0)
 
