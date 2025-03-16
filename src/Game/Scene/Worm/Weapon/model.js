@@ -80,12 +80,12 @@ class Weapon extends GameObject {
                 const relativeVelocity = MathUtils.relativeVelocity(landModel.vector, this.vector)
                 const velAlongNormal = MathUtils.dotProduct(relativeVelocity, normal)
 
-                const massSum = this.mass + landModel.mass
-                const ratio = this.mass / massSum
-
                 if (velAlongNormal > 0) {
                     return
                 }
+
+                const massSum = this.mass + landModel.mass
+                const ratio = this.mass / massSum
 
                 const ex = Math.min(this.xRestitution, landModel.restitution)
                 let jx = -(1 + ex) * velAlongNormal
@@ -94,6 +94,8 @@ class Weapon extends GameObject {
                 const ey = Math.min(this.yRestitution, landModel.restitution)
                 let jy = -(1 + ey) * velAlongNormal
                 jy /= this.inverseMass + landModel.inverseMass
+
+                console.log(normal)
 
                 this.vector[0] =- this.inverseMass * jx * ratio * normal[0]
                 this.vector[1] =- this.inverseMass * jy * ratio * normal[1]

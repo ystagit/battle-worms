@@ -32,7 +32,7 @@ class GameObject extends EventEmitter {
         )
 
         this.color = [1, 1, 1, 1]
-        this.friction = 0.1
+        this.friction = 0.6
         this.restitution = 0.2
         this.mass = 0
         this.collided = false

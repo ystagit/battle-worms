@@ -4,7 +4,16 @@ class CompositeView extends ComponentView {
 
     constructor(model, controller = null) {
         super(model, controller)
+        this.listenerIds = []
         this.children = []
+    }
+
+    on(eventName, callback) {
+        const id = super.on(eventName, callback)
+
+        if (id) {
+            this.listenerIds.push(id)
+        }
     }
 
     add(component) {
@@ -37,6 +46,10 @@ class CompositeView extends ComponentView {
     destroy() {
         const index = this.parent.children.findIndex(ch => ch.model.id === this.model.id)
         this.parent.children.splice(index , 1)
+
+        this.listenerIds.forEach((id) => this.removeEvent(id))
+
+        this.children.forEach((ch) => ch.destroy())
     }
 
     removeChildByModel(model) {
