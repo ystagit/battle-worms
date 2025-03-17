@@ -24,10 +24,7 @@ class Weapon extends GameObject {
         )
 
         this.renderable = new RenderableTexture(this)
-        this.on('ON_MOVE_MOUSE', this.onUpdateCursorPosition.bind(this))
     }
-
-    onUpdateCursorPosition(position) { this.cursorPosition = position }
 
     hide() {
         if (!this.thrown) {

@@ -46,10 +46,12 @@ class CompositeView extends ComponentView {
     destroy() {
         const index = this.parent.children.findIndex(ch => ch.model.id === this.model.id)
         this.parent.children.splice(index , 1)
-
         this.listenerIds.forEach((id) => this.removeEvent(id))
-
         this.children.forEach((ch) => ch.destroy())
+        this.model?.destroy()
+        this.model = null
+        this.controller = null
+        this.parent = null
     }
 
     removeChildByModel(model) {

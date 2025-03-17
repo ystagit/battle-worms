@@ -10,7 +10,10 @@ class AimView extends CompositeView {
 
     onInitListeners() {
         this.on('ON_RUN', this.onRun.bind(this))
+        this.on('ON_MOVE_MOUSE', this.onUpdateCursorPosition.bind(this))
     }
+
+    onUpdateCursorPosition(position) { this.controller.onSetCursorPositionHandler(position) }
 
     onRun(secondsPassed) { this.controller.onRunHandler(secondsPassed, this) }
 

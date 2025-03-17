@@ -15,7 +15,7 @@ class ExplosionView extends CompositeView {
 
     render(composite) {
         this.model.player.update()
-        this.controller.onDraw()
+        this.controller?.onDraw()
     }
 }
 

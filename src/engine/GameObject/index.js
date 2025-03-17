@@ -6,7 +6,7 @@ import Transform from '../Transform'
 import MathUtils from '../MathUnits'
 
 import { guid } from '../../helpers/utils'
-import AnimationPlayer from "../core/AnimationPlayer";
+import AnimationPlayer from '../core/AnimationPlayer'
 import Renderable from '../renderables/Renderable'
 import RenderableTexture from '../renderables/RenderableTexture'
 import RenderableSpriteAnimation from '../renderables/RenderableSpriteAnimation'
@@ -19,7 +19,7 @@ class GameObject extends EventEmitter {
         super()
         this.id = guid()
         this.initialPosition = [0, 0]
-        this.cursorPosition = null
+        this.cursorPosition = [0, 0]
         this.vector = [0, 0]
         this.transform = new Transform()
         this.renderable = new Renderable(this)
@@ -39,6 +39,27 @@ class GameObject extends EventEmitter {
         this.hover = false
         this.focused = false
         this.touchedState = TOUCHED_STATE.NO
+        this.listenerIds = []
+    }
+
+    destroy() {
+        this.id = null
+        this.initialPosition = null
+        this.cursorPosition = null
+        this.vector = null
+        this.transform = null
+        this.renderable = null
+        this.player = null
+        this.boundingBox = null
+        this.color = null
+        this.friction = null
+        this.restitution = null
+        this.mass = null
+        this.collided = null
+        this.hover = null
+        this.focused = null
+        this.touchedState = null
+        this.listenerIds = null
     }
 
     get inverseMass() { return (this.mass === 0) ? 0 : 1 / this.mass }

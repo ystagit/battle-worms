@@ -14,6 +14,7 @@ class WeaponView extends CompositeView {
         this.on('ON_RUN', this.onRun.bind(this))
         this.on('ON_FIRE', this.onFire.bind(this))
         this.on('ON_CHECK_COLLIDING', this.onCheckColliding.bind(this))
+        this.on('ON_MOVE_MOUSE', this.onUpdateCursorPosition.bind(this))
 
         const explosion = Explosion.create(this.model.getX(), this.model.getY())
 
@@ -32,6 +33,7 @@ class WeaponView extends CompositeView {
     }
     onRun(secondsPassed) { this.controller.onRunHandler(secondsPassed, this.parent) }
     onCheckColliding() { this.controller.onCheckCollidingHandler(this.parent) }
+    onUpdateCursorPosition(position) { this.controller.onSetCursorPositionHandler(position) }
 
     render(parentComposite) {
         if (parentComposite instanceof WormView) {

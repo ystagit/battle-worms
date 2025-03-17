@@ -20,11 +20,7 @@ class AimModel extends GameObject {
         )
 
         this.renderable = new RenderableTexture(this)
-
-        this.on('ON_MOVE_MOUSE', this.onUpdateCursorPosition.bind(this))
     }
-
-    onUpdateCursorPosition(position) { this.cursorPosition = position }
 
     run(secondsPassed, composite) {
         const wormView = composite.findParent(WormView)
